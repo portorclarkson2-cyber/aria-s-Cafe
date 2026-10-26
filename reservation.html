@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation</title>
+  <link rel="stylesheet" href="dcsa.css">
+</head>
+<body>
+
+
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/olog.jpg" alt="Datamex Logo" style="width: 50px; height: 50px;">
+      <strong>Aria's Cafe</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+
+      <button class="btn" onclick="window.location.href='news.html'">News & Articles</button>
+    </div>
+
+    <button class="btn" onclick="window.location.href='menu.html'">Menu</button>
+  </div>
+
+    <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+  </div>
+
+  </div>
+  <button class="btn" onclick="window.location.href='reservation.html'">Reservation</button>
+</div>
+
+    <div class="profile-wrapper" id="profileWrapper">
+      <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false">☰</button>
+      <ul id="profileMenu" class="profile-menu">
+        <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+        <li><a href="login.html" id="logoutBtn" class="profile-item">➜] Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<main style="padding: 60px 20px; max-width: 900px; margin: auto;">
+  <section class="card">
+    
+    <div class="section" id="reservation">
+        <h2 style="text-align:center; font-weight: 1000; font-size: 32px; color:brown">RESERVATION📅</h2>
+        <div class="reservation-section">
+          <h3>☕ Reserve a Table</h3>
+          <p>Book your seat and enjoy a cozy time at Aria Cafe.</p>
+      
+          <form id="reservationForm" class="reservation-form">
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g. 09XXXXXXXXX" required>
+            </div>
+            <!-- Date -->
+            <div class="form-group">
+              <label for="date">Reservation Date</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <!-- Time -->
+            <div class="form-group">
+              <label for="time">Reservation Time</label>
+              <input type="time" id="time" name="time" required>
+            </div>  
+            <!-- Guests -->
+            <div class="form-group">
+              <label for="guests">Number of Guests</label>
+              <input type="number" id="guests" name="People" placeholder="How many people" required>
+            </div>
+            <!-- Submit -->
+            <button type="submit" class="reserve-btn">Reserve Now</button>
+          </form>
+        </div>
+      </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h2>🏫 Branches</h2>
+      <p>Parañaque, Metro Manila</p>
+      <p>Pasay City, Metro Manila</p>
+      <p>Caloocan City, Metro Manila</p>
+    </div>
+
+    <div class="footer-section">
+      <h2>📞 Contact</h2>
+      <p>+63-929-551-5005</p>
+      <p>+63-926-395-8937</p>
+      <p>Email: <a href="mailto:info@datamex.edu.ph">info@datamex.edu.ph</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Aria's Cafe. All Rights Reserved.</p>  </div>
+</footer>
+
+<script src="dcsa.js"></script>
+</body>
+</html>

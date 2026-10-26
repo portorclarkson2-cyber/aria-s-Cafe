@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact Us - Aria's Cafe</title>
+<link rel="stylesheet" href="dcsa.css">
+
+<style>
+/* ===== CONTACT PAGE STYLE ===== */
+.contact-section{
+  padding:80px 10%;
+  background:#f5f0e6;
+}
+
+.contact-container{
+  display:flex;
+  justify-content:space-between;
+  gap:60px;
+  flex-wrap:wrap;
+}
+
+.contact-left{
+  flex:1;
+  min-width:300px;
+}
+
+.contact-left h1{
+  font-size:40px;
+  margin-bottom:20px;
+  color:#8b4513;
+}
+
+.contact-left p{
+  margin:10px 0;
+  font-size:16px;
+}
+
+.social-icons{
+  margin-top:20px;
+  font-size:22px;
+}
+
+.contact-right{
+  flex:1;
+  min-width:300px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.contact-form button{
+  background:#b5651d;
+  color:white;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:25px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.contact-form button:hover{
+  background:#8b4513;
+}
+</style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/olog.jpg" alt="Datamex Logo" style="width: 50px; height: 50px;">
+      <strong>Aria's Cafe</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+
+      <button class="btn" onclick="window.location.href='news.html'">News & Articles</button>
+    </div>
+
+    <button class="btn" onclick="window.location.href='menu.html'">Menu</button>
+  </div>
+
+    <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+  </div>
+
+  </div>
+  <button class="btn" onclick="window.location.href='reservation.html'">Reservation</button>
+</div>
+
+    <div class="profile-wrapper" id="profileWrapper">
+      <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false">☰</button>
+      <ul id="profileMenu" class="profile-menu">
+        <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+        <li><a href="login.html" id="logoutBtn" class="profile-item">➜] Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+<!-- ===== CONTACT SECTION ===== -->
+<section class="contact-section">
+
+  <div class="contact-container">
+
+    <!-- LEFT SIDE -->
+    <div class="contact-left">
+      <h1>Get in touch, Brew!</h1>
+
+      <p><strong>For marketing inquiries:</strong><br>
+      marketing@ariascafe.com</p>
+
+      <p><strong>Customer support:</strong><br>
+      support@ariascafe.com</p>
+
+      <p><strong>Other inquiries:</strong><br>
+      info@ariascafe.com</p>
+
+      <div class="social-icons">
+        Follow us:
+        <br>ⓕ Facebook
+        <br>🅾 Instagram
+        <br>♪ TikTok
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (FORM) -->
+    <div class="contact-right">
+      <form class="contact-form" id="contactForm">
+
+        <label>Full Name:</label>
+        <input type="text" id="fullName" placeholder="Enter your Full Name" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" placeholder="Enter your Email" required>
+
+        <label>Contact Number:</label>
+        <input type="text" id="phone" placeholder="Enter your Contact Number">
+
+        <label>Subject:</label>
+        <select id="subject" required>
+          <option value="">-- Select Subject --</option>
+          <option>Marketing</option>
+          <option>Support</option>
+          <option>Other</option>
+        </select>
+
+        <label>Message:</label>
+        <textarea id="message" rows="5" placeholder="Enter your message" required></textarea>
+
+        <button type="submit">Contact Us</button>
+
+      </form>
+    </div>
+
+  </div>
+
+</section>
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+  
+      const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  
+      contacts.push({
+          name: document.getElementById("fullName").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          subject: document.getElementById("subject").value,
+          message: document.getElementById("message").value,
+          date: new Date().toLocaleString()
+      });
+  
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+  
+      alert("Message sent successfully!");
+  
+      this.reset();
+  });
+  </script>
+
+<script src="dcsa.js"></script>
+</body>
+</html>

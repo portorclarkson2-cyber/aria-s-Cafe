@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aria's Cafe | Menu</title>
+
+<link rel="stylesheet" href="dcsa.css">
+
+<style>
+/* MENU + CART LAYOUT */
+.menu-cart-container{
+  display:flex;
+  gap:30px;
+  align-items:flex-start;
+  max-width:1200px;
+  margin:30px auto;
+}
+
+/* LEFT MENU AREA */
+.menu-section{
+  flex:2;
+}
+
+/* RIGHT CART */
+#cart{
+  flex:1;
+  position:sticky;
+  top:100px;
+  height:fit-content;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .menu-cart-container{
+    flex-direction:column;
+  }
+  #cart{
+    position:static;
+  }
+}
+
+.checkout-box{
+  width:750px;
+  max-width:95%;
+  max-height:90vh;
+  overflow-y:auto;
+
+  background:white;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.checkout-box h2{
+  text-align:center;
+  color:brown;
+  margin-bottom:20px;
+}
+
+.order-summary{
+  background:#faf7ef;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+.order-summary h3{
+  margin-top:0;
+  color:brown;
+}
+
+.order-summary p{
+  display:flex;
+  justify-content:space-between;
+}
+
+.grand-total{
+  font-size:18px;
+  color:brown;
+}
+
+.checkout-group{
+  margin-bottom:15px;
+}
+
+.checkout-group label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:bold;
+}
+
+.checkout-group input,
+.checkout-group select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  box-sizing:border-box;
+}
+
+.delivery-info{
+  background:#fff7d6;
+  padding:12px;
+  border-radius:10px;
+  margin:15px 0;
+  text-align:center;
+}
+
+.checkout-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.btn-confirm,
+.btn-cancel{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.btn-confirm{
+  background:brown;
+  color:white;
+}
+
+.btn-cancel{
+  background:#ddd;
+}
+
+.gcash-qr{
+  width:150px;
+  max-width:100%;
+  display:block;
+  margin:20px auto;
+  border-radius:20px;
+  box-shadow:0 6px 20px rgba(0,0,0,.2);
+}
+</style>
+
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img src="img/olog.jpg" alt="Datamex Logo" style="width: 50px; height: 50px;">
+    <strong>Aria's Cafe</strong>
+  </div>
+  
+  <div class="nav-buttons">
+    <button class="btn" onclick="window.location.href='index.html'">Home</button>
+    <div class="dropdown">
+      <button class="btn">About Us ▼</button>
+      <div class="dropdown-content">
+        <button onclick="window.location.href='history.html'">Our History</button>   
+        <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+      </div>
+    </div>
+
+    <button class="btn" onclick="window.location.href='news.html'">News & Articles</button>
+  </div>
+
+  <button class="btn" onclick="window.location.href='menu.html'">Menu</button>
+</div>
+
+  <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+</div>
+
+<button class="btn" onclick="window.location.href='reservation.html'">Reservation</button>
+</div>
+
+  <div class="profile-wrapper" id="profileWrapper">
+    <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false">☰</button>
+    <ul id="profileMenu" class="profile-menu">
+      <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+      <li><a href="login.html" id="logoutBtn" class="profile-item">➜] Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ================= MENU SECTION ================= -->
+<section class="section">
+
+<h2 style="text-align:center;font-size:32px;color:brown;">
+☕ THE MENU
+</h2>
+
+<!-- MENU TABS -->
+<div class="menu-tabs">
+  <button class="tablink active" onclick="openMenu('hot',this)">Milk Tea 🥤</button>
+  <button class="tablink" onclick="openMenu('iced',this)">Refreshers 🍹</button>
+</div>
+
+<div class="menu-cart-container">
+
+<!-- ================= LEFT MENU ================= -->
+<div class="menu-section">
+
+ <!-- HOT -->
+<div id="hot" class="menu" style="display:block">
+  <h2>Milk Tea 🥤</h2>
+  <div class="menu-grid" id="hotList"></div>
+</div>
+
+<!-- ICED -->
+<div id="iced" class="menu">
+  <h2>Refreshers 🍹</h2>
+  <div class="menu-grid" id="icedList"></div>
+</div>
+
+</div>
+
+<!-- ================= CART ================= -->
+<div id="cart" class="cart-container">
+  <h3>🛒 Your Order</h3>
+
+  <ul id="cart-list" class="cart-list"></ul>
+
+  <p class="cart-total">
+    <strong>Total:</strong> ₱<span id="cart-total">0</span>
+  </p>
+
+  <button id="confirm-btn" class="confirm-btn" onclick="openCheckout()">
+    ✅ Confirm Order
+  </button>
+</div>
+
+<!-- ================= POPUP ================= -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h3 id="popup-title">Item Added</h3>
+    <p id="popup-message"></p>
+  </div>
+</div>
+
+</section>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div id="checkoutModal" class="checkout-overlay">
+
+  <div class="checkout-box">
+
+    <h2>🧾 Checkout</h2>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-summary">
+
+      <h3>🛒 Order Summary</h3>
+
+      <div id="checkoutItems"></div>
+
+    </div>
+
+    <!-- CUSTOMER INFO -->
+
+    <div class="checkout-group">
+      <label>👤 Full Name</label>
+      <input
+        type="text"
+        id="cName"
+        readonly
+      >
+    </div>
+
+    <div class="checkout-group">
+      <label>📱 Phone Number</label>
+      <input
+        type="tel"
+        id="cPhone"
+        placeholder="09XXXXXXXXXX"
+      >
+    </div>
+
+    <div class="checkout-group">
+      <label>📍 Delivery Address</label>
+      <input
+        type="text"
+        id="cAddress"
+        placeholder="Enter complete address"
+      >
+    </div>
+
+    <div class="checkout-group">
+      <label>💳 Payment Method</label>
+
+      <select id="cPayment" onchange="toggleGCash(); updateTotal();">
+        <option value="COD">
+          Cash on Delivery
+        </option>
+
+        <option value="GCash">
+          GCash
+        </option>
+      </select>
+    </div>
+
+    <!-- GCash Section -->
+
+    <div
+      id="gcashField"
+      class="checkout-group"
+      style="display:none;"
+    >
+
+      <h4>💳 GCash Payment</h4>
+
+      <p style="text-align:center;">
+        Send payment to:
+        <strong>09123456789</strong>
+      </p>
+
+      <img
+        src="img/QR Code.png"
+        alt="GCash QR Code"
+        class="gcash-qr"
+      >
+
+      <label>Reference Number</label>
+
+      <input
+        type="text"
+        id="referenceNumber"
+        placeholder="Enter GCash Reference Number"
+      >
+
+    </div>
+
+    <!-- DELIVERY INFO -->
+
+    <div class="delivery-info">
+      🚚 Estimated Delivery:
+      <strong>20 - 30 Minutes</strong>
+    </div>
+
+    <!-- TOTAL SECTION -->
+
+    <div class="checkout-total-box">
+
+      <div class="total-row">
+        <span>Subtotal</span>
+        <strong>
+          ₱<span id="checkoutSubtotal">0</span>
+        </strong>
+      </div>
+
+      <div class="total-row">
+        <span>Delivery Fee</span>
+        <strong>₱<span id="checkoutDeliveryFee">0</span></strong>
+      </div>
+
+      <div class="total-row grand-total">
+        <span>Total</span>
+        <strong>
+          ₱<span id="checkoutTotal">0</span>
+        </strong>
+      </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="checkout-buttons">
+
+      <button
+        class="btn-confirm"
+        onclick="placeOrder()"
+      >
+        ✅ Place Order
+      </button>
+
+      <button
+        class="btn-cancel"
+        onclick="closeCheckout()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h2>🏫 Branches</h2>
+      <p>Parañaque</p>
+      <p>Pasay</p>
+      <p>Caloocan</p>
+    </div>
+
+    <div class="footer-section">
+      <h2>📞 Contact</h2>
+      <p>+63-929-551-5005</p>
+      <p>+63-926-395-8937</p>
+      <p>Email: info@datamex.edu.ph</p>
+    </div>
+
+  </div>
+
+  <p class="footer-bottom">
+    © 2025 Aria's Cafe. All Rights Reserved.
+  </p>
+</footer>
+<script>
+const currentUser =
+  JSON.parse(localStorage.getItem("currentUser"));
+  
+  const ordersKey =
+  "orders_" + currentUser.email;
+  
+  let orders =
+  JSON.parse(localStorage.getItem(ordersKey)) || [];
+  
+  const newOrder = {
+    id: Date.now(),
+    userId: currentUser.id,
+    userName: currentUser.name,
+    userEmail: currentUser.email,
+  
+    name: product.name,
+    price: product.price,
+    image: product.image,
+  
+    status: "Pending"
+  };
+  
+  orders.push(newOrder);
+  
+  localStorage.setItem(
+    ordersKey,
+    JSON.stringify(orders)
+  );
+</script>
+<script src="dcsa.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile - Aria's Cafe</title>
+  <link rel="stylesheet" href="dcsa.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#f5f0e6;
+    }
+
+    /* ===== PROFILE PAGE ===== */
+    .profile-container{
+      max-width:1100px;
+      margin:40px auto;
+      display:grid;
+      grid-template-columns:300px 1fr;
+      gap:25px;
+      padding:20px;
+    }
+
+    .profile-sidebar img{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid #6f4e37;
+  cursor:pointer;
+}
+
+    /* LEFT SIDE */
+    .profile-sidebar{
+      background:white;
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+
+    .profile-sidebar img{
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      object-fit:cover;
+      border:5px solid #6f4e37;
+    }
+
+    .profile-sidebar h2{
+      margin-top:15px;
+      color:#6f4e37;
+    }
+
+    .profile-sidebar p{
+      color:gray;
+      margin-top:5px;
+      font-size:14px;
+    }
+
+    .edit-btn{
+      margin-top:20px;
+      background:#6f4e37;
+      color:white;
+      border:none;
+      padding:10px 20px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .edit-btn:hover{
+      background:#4e3423;
+    }
+
+    /* RIGHT SIDE */
+    .profile-content{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      border-radius:20px;
+      padding:25px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .card h3{
+      color:#6f4e37;
+      margin-bottom:20px;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .info-box{
+      background:#f7f7f7;
+      padding:15px;
+      border-radius:12px;
+    }
+
+    .info-box span{
+      font-size:13px;
+      color:gray;
+    }
+
+    .info-box h4{
+      margin-top:5px;
+      color:#333;
+    }
+
+    /* ORDERS */
+    .orders{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+}
+
+.order-box{
+  background:#fff4ea;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+}
+
+    .order-box:hover{
+      transform:translateY(-5px);
+    }
+
+    .order-box i{
+      font-size:28px;
+      color:#6f4e37;
+      margin-bottom:10px;
+    }
+
+    .order-box h4{
+      color:#333;
+    }
+
+    .order-box p{
+      color:gray;
+      font-size:14px;
+    }
+
+    /* RESERVATIONS */
+.reservations{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+  margin-top:15px;
+}
+
+.reservation-box{
+  background:#eef8ff;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.reservation-box:hover{
+  transform:translateY(-5px);
+}
+
+.reservation-box i{
+  font-size:28px;
+  color:#3498db;
+  margin-bottom:10px;
+}
+
+.reservation-box h4{
+  color:#333;
+}
+
+.reservation-box p{
+  color:gray;
+  font-size:14px;
+}
+
+    /* FOOTER */
+    .footer{
+      background:#6f4e37;
+      color:white;
+      margin-top:40px;
+      padding:30px;
+    }
+
+    .footer-container{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:20px;
+    }
+
+    .footer-section h2{
+      margin-bottom:10px;
+    }
+
+    .footer-bottom{
+      text-align:center;
+      margin-top:20px;
+      border-top:1px solid rgba(255,255,255,0.2);
+      padding-top:15px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+
+      .profile-container{
+        grid-template-columns:1fr;
+      }
+
+      .orders{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .info-grid{
+        grid-template-columns:1fr;
+      }
+
+      nav{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      .nav-buttons{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+    }
+
+    /* VIEW BUTTON */
+.view-orders-btn{
+  background:#6f4e37;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.view-orders-btn:hover{
+  background:#4e3423;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+}
+
+.modal-content{
+  background:white;
+  width:90%;
+  max-width:700px;
+  margin:50px auto;
+  padding:30px;
+  border-radius:20px;
+  position:relative;
+  max-height:80vh;
+  overflow-y:auto;
+}
+
+.close-btn{
+  position:absolute;
+  right:20px;
+  top:15px;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* ORDER ITEM */
+.order-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#f7f7f7;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+.order-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.order-left img{
+  width:70px;
+  height:70px;
+  border-radius:12px;
+  object-fit:cover;
+}
+
+.order-info h4{
+  margin-bottom:5px;
+}
+
+.status{
+  padding:6px 12px;
+  border-radius:10px;
+  font-size:13px;
+  color:white;
+}
+
+.preparing{
+  background:orange;
+}
+
+.shipping{
+  background:#a5ae2b;
+}
+
+.receiving{
+  background: #3498db;
+}
+
+.delivered{
+  background:green;
+}
+
+.rejected{
+  background:#e74c3c;
+}
+
+.reservation-box.rejected-box {
+  background: #fff0f0;
+}
+
+.reservation-box.rejected-box i {
+  color: #e74c3c;
+} 
+
+.review-btn{
+  margin-top:10px;
+  background:#f39c12;
+  color:white;
+  border:none;
+  padding:8px 15px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.review-btn:hover{
+  background:#d68910;
+}
+
+.review-text{
+  margin-top:10px;
+  font-size:14px;
+  color:#555;
+}
+
+.stars{
+  color:gold;
+  font-size:18px;
+}
+
+.star{
+  font-size:35px;
+  cursor:pointer;
+  opacity:.3;
+  transition:.2s;
+}
+
+.star.active{
+  opacity:1;
+}
+
+.review-btn{
+  margin-top:10px;
+  padding:8px 15px;
+  border:none;
+  border-radius:8px;
+  background:#f39c12;
+  color:white;
+  cursor:pointer;
+}
+
+.review-btn:hover{
+  background:#d68910;
+}
+
+.review-text{
+  margin-top:10px;
+}
+
+.review-text p{
+  margin-top:5px;
+  font-size:14px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/olog.jpg" alt="Datamex Logo" style="width: 50px; height: 50px;">
+      <strong>Aria's Cafe</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+
+      <button class="btn" onclick="window.location.href='news.html'">News & Articles</button>
+    </div>
+
+    <button class="btn" onclick="window.location.href='menu.html'">Menu</button>
+  </div>
+
+    <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+  </div>
+
+  <button class="btn" onclick="window.location.href='reservation.html'">Reservation</button>
+</div>
+
+    <div class="profile-wrapper" id="profileWrapper">
+      <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false">☰</button>
+      <ul id="profileMenu" class="profile-menu">
+        <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+        <li><a href="login.html" id="logoutBtn" class="profile-item">➜] Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- ===== PROFILE SECTION ===== -->
+  <div class="profile-container">
+
+    <!-- ===== PROFILE SIDEBAR ===== -->
+<div class="profile-sidebar">
+
+  <!-- PROFILE IMAGE -->
+  <img id="profileImage"
+       src="https://i.pinimg.com/736x/4d/7d/77/4d7d77f3b7f0cbecf43df0f2b6f5f4db.jpg"
+       alt="Profile">
+
+  <!-- HIDDEN FILE INPUT -->
+  <input type="file" id="imageUpload" accept="image/*" hidden>
+
+  <h2 id="profileName">Loading...</h2>
+<p id="profileEmail">Loading...</p>
+  <p>Coffee Lover ☕</p>
+
+  <button class="edit-btn" onclick="document.getElementById('imageUpload').click()">
+    <i class="fa-solid fa-camera"></i> Change Picture
+  </button>
+
+</div>
+
+    <!-- RIGHT -->
+    <div class="profile-content">
+
+      <!-- PERSONAL INFO -->
+      <div class="card">
+        <h3>👤 Personal Information</h3>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <span>Full Name</span>
+            <h4 id="fullName">Loading...</h4>
+          </div>
+          
+          <div class="info-box">
+            <span>Email</span>
+            <h4 id="email">Loading...</h4>
+          </div>
+
+          <div class="info-box">
+            <span>Phone Number</span>
+            <h4 id="phoneNumber">Loading...</h4>
+          </div>
+
+          
+
+        </div>
+      </div>
+
+    <!-- ===== ORDERS SECTION ===== -->
+<div class="card">
+
+  <h3>🛒 My Orders</h3>
+
+  <div class="orders">
+
+    <!-- PENDING -->
+    <div class="order-box" onclick="filterOrders('Pending')">
+      <i class="fa-solid fa-clock"></i>
+      <h4>Pending</h4>
+      <p id="pendingCount">0 Orders</p>
+    </div>
+
+    <!-- TO SHIP -->
+    <div class="order-box" onclick="filterOrders('To Ship')">
+      <i class="fa-solid fa-box"></i>
+      <h4>To Ship</h4>
+      <p id="toShipCount">0 Orders</p>
+    </div>
+
+    <!-- TO RECEIVE -->
+    <div class="order-box" onclick="filterOrders('To Receive')">
+      <i class="fa-solid fa-truck"></i>
+      <h4>To Receive</h4>
+      <p id="toReceiveCount">0 Orders</p>
+    </div>
+
+    <!-- COMPLETED -->
+    <div class="order-box" onclick="filterOrders('Completed')">
+      <i class="fa-solid fa-circle-check"></i>
+      <h4>Completed</h4>
+      <p id="completedCount">0 Orders</p>
+    </div>
+
+    <!-- REJECTED -->
+   <div class="order-box" onclick="filterOrders('Rejected')">
+      <i class="fa-solid fa-circle-xmark"></i>
+      <h4>Rejected</h4>
+      <p id="rejectedCount">0 Orders</p>
+    </div>
+
+  </div>
+</div>
+    
+
+  
+
+
+<!-- ===== ORDER MODAL ===== -->
+<div id="ordersModal" class="modal">
+
+  <div class="modal-content">
+
+    <span class="close-btn" onclick="closeOrdersModal()">
+      &times;
+    </span>
+
+    <h2 id="modalTitle">☕ Orders</h2>
+
+    <div id="ordersList"></div>
+
+  </div>
+
+</div>
+
+<div class="card">
+<h3>📅 My Reservations</h3>
+
+<div class="reservations">
+
+  <div class="reservation-box" onclick="filterReservations('Pending')">
+    <i class="fa-solid fa-hourglass-half"></i>
+    <h4>Pending</h4>
+    <p id="pendingReserveCount">0 Reservations</p>
+  </div>
+
+  <div class="reservation-box" onclick="filterReservations('Confirmed')">
+    <i class="fa-solid fa-calendar-check"></i>
+    <h4>Confirmed</h4>
+    <p id="confirmedReserveCount">0 Reservations</p>
+  </div>
+
+  <div class="reservation-box" onclick="filterReservations('Rejected')">
+    <i class="fa-solid fa-calendar-xmark"></i>
+    <h4>Rejected</h4>
+    <p id="rejectedReserveCount">0 Reservations</p>
+  </div>
+
+  <div class="reservation-box" onclick="filterReservations('Completed')">
+    <i class="fa-solid fa-circle-check"></i>
+    <h4>Completed</h4>
+    <p id="completedReserveCount">0 Reservations</p>
+  </div>
+
+  <div class="reservation-box" onclick="filterReservations('Cancelled')">
+    <i class="fa-solid fa-circle-xmark"></i>
+    <h4>Cancelled</h4>
+    <p id="cancelledReserveCount">0 Reservations</p>
+  </div>
+
+</div>
+    </div>
+  </div> 
+
+</div>
+ 
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <div class="footer-section">
+        <h2>🏫 Branches</h2>
+        <p>Parañaque, Metro Manila</p>
+        <p>Pasay City, Metro Manila</p>
+        <p>Caloocan City, Metro Manila</p>
+      </div>
+
+      <div class="footer-section">
+        <h2>📞 Contact</h2>
+        <p>+63-929-551-5005</p>
+        <p>+63-926-395-8937</p>
+        <p>Email: aria@gmail.com.ph</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Aria's Cafe. All Rights Reserved.</p>
+    </div>
+
+  </footer>
+  <script>
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) { window.location.href = "login.html"; }
+    
+    document.getElementById("profileName").textContent = currentUser.fullname || currentUser.name || "User";
+    document.getElementById("fullName").textContent = currentUser.fullname || currentUser.name || "User";
+    document.getElementById("email").textContent = currentUser.email || "No Email";
+    document.getElementById("profileEmail").textContent = currentUser.email || "No Email";
+    document.getElementById("phoneNumber").textContent = currentUser.number || "No Number";
+    
+    const imageUpload = document.getElementById("imageUpload");
+    const profileImage = document.getElementById("profileImage");
+    const imageKey = "profileImage_" + currentUser.email;
+    const savedImage = localStorage.getItem(imageKey);
+    if (savedImage) { profileImage.src = savedImage; }
+    
+    imageUpload.addEventListener("change", function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        profileImage.src = e.target.result;
+        localStorage.setItem(imageKey, e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    let orders = allOrders.filter(o => o.userEmail === currentUser.email);
+    
+    function updateCounts() {
+      document.getElementById("pendingCount").innerText = orders.filter(o => o.status === "Pending").length + " Orders";
+      document.getElementById("toShipCount").innerText = orders.filter(o => o.status === "To Ship").length + " Orders";
+      document.getElementById("toReceiveCount").innerText = orders.filter(o => o.status === "To Receive").length + " Orders";
+      document.getElementById("completedCount").innerText = orders.filter(o => o.status === "Completed").length + " Orders";
+      document.getElementById("rejectedCount").innerText = orders.filter(o => o.status === "Rejected").length + " Orders";
+    }
+    updateCounts();
+    
+    function filterOrders(status) {
+      document.getElementById("ordersModal").style.display = "block";
+      document.getElementById("modalTitle").innerText = status + " Orders";
+      const ordersList = document.getElementById("ordersList");
+      ordersList.innerHTML = "";
+      const filteredOrders = orders.filter(order => order.status === status);
+    
+      if (filteredOrders.length === 0) {
+        ordersList.innerHTML = `<p style="text-align:center;padding:20px;">No ${status} orders found.</p>`;
+        return;
+      }
+    
+      filteredOrders.forEach(order => {
+        let statusClass = "";
+        if (order.status === "Pending") statusClass = "preparing";
+        else if (order.status === "To Ship") statusClass = "shipping";
+        else if (order.status === "To Receive") statusClass = "receiving";
+        else if (order.status === "Rejected") statusClass = "rejected";
+        else statusClass = "delivered";
+    
+        ordersList.innerHTML += `
+<div class="order-item">
+  <div class="order-left">
+    <img src="${order.image}" alt="Coffee">
+
+    <div class="order-info">
+      <h4>${order.itemName}</h4>
+      <p>${order.price}</p>
+
+      ${order.status === "Rejected"
+        ? `<p style="color:red;">Reason: ${order.rejectReason}</p>`
+        : ""}
+
+      ${
+  order.status === "Completed"
+  ? order.review
+    ? `
+      <div class="review-text">
+        <div style="color:gold;font-size:18px;">
+          ${"⭐".repeat(order.rating)}
+        </div>
+        <p>${order.review}</p>
+      </div>
+    `
+    : `
+      <button
+        class="review-btn"
+        onclick="openReviewModal(${order.id})">
+        ⭐ Rate & Review
+      </button>
+    `
+  : ""
+}
+    </div>
+  </div>
+
+  <span class="status ${statusClass}">
+    ${order.status}
+  </span>
+</div>`;
+      });
+    }
+    
+    function closeOrdersModal() { document.getElementById("ordersModal").style.display = "none"; }
+    
+    window.onclick = function(event) {
+      const modal = document.getElementById("ordersModal");
+      if (event.target === modal) { modal.style.display = "none"; }
+    };
+    
+    const allReservations = JSON.parse(localStorage.getItem("reservations")) || [];
+    const myReservations = allReservations.filter(r => r.userEmail === currentUser.email);
+    
+    function updateReservationCounts() {
+
+document.getElementById("pendingReserveCount").innerText =
+  myReservations.filter(r => r.status === "Pending").length +
+  " Reservations";
+
+document.getElementById("confirmedReserveCount").innerText =
+  myReservations.filter(r => r.status === "Confirmed").length +
+  " Reservations";
+
+document.getElementById("completedReserveCount").innerText =
+  myReservations.filter(r => r.status === "Completed").length +
+  " Reservations";
+
+document.getElementById("cancelledReserveCount").innerText =
+  myReservations.filter(r => r.status === "Cancelled").length +
+  " Reservations";
+
+document.getElementById("rejectedReserveCount").innerText =
+  myReservations.filter(r => r.status === "Rejected").length +
+  " Reservations";
+}
+    updateReservationCounts();
+    
+    function filterReservations(status) {
+      document.getElementById("ordersModal").style.display = "block";
+      document.getElementById("modalTitle").innerText = status + " Reservations";
+      const ordersList = document.getElementById("ordersList");
+      ordersList.innerHTML = "";
+      const filteredReservations = myReservations.filter(r => r.status === status);
+    
+      if (filteredReservations.length === 0) {
+        ordersList.innerHTML = `<p style="text-align:center;padding:20px;">No ${status} reservations found.</p>`;
+        return;
+      }
+    
+      filteredReservations.forEach(reservation => {
+
+const rejectReason =
+  reservation.status === "Rejected" && reservation.rejectReason
+    ? `
+      <p style="
+        color:#e74c3c;
+        margin-top:8px;
+        font-weight:bold;
+      ">
+        ❌ Reason: ${reservation.rejectReason}
+      </p>
+    `
+    : "";
+
+ordersList.innerHTML += `
+  <div class="order-item">
+
+    <div class="order-left">
+
+      <div class="order-info">
+
+        <h4>📅 ${reservation.date}</h4>
+
+        <p>🕒 ${reservation.time}</p>
+
+        <p>👥 ${reservation.guests} Guests</p>
+
+        <p>📞 ${reservation.phone}</p>
+
+        ${rejectReason}
+
+      </div>
+
+    </div>
+
+    <span class="status ${getReservationClass(reservation.status)}">
+      ${reservation.status}
+    </span>
+
+  </div>
+`;
+});
+    }
+    
+    function getReservationClass(status) {
+
+if (status === "Pending")
+  return "preparing";
+
+if (status === "Confirmed")
+  return "shipping";
+
+if (status === "Completed")
+  return "delivered";
+
+if (status === "Cancelled")
+  return "rejected";
+
+if (status === "Rejected")
+  return "rejected";
+
+return "";
+}
+    
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+    
+    if (profileBtn && profileMenu) {
+      profileBtn.addEventListener("click", function(event) {
+        event.stopPropagation();
+        profileMenu.classList.toggle("show");
+      });
+    }
+    
+    window.onclick = function(event) {
+      if (!event.target.matches('.profile-btn') && !event.target.matches('.profile-menu')) {
+        if (profileMenu.classList.contains('show')) { profileMenu.classList.remove('show'); }
+      }
+    };
+
+    function addReview(orderId){
+
+let rating = prompt("Rate this order (1-5 stars):");
+
+if(!rating) return;
+
+rating = parseInt(rating);
+
+if(rating < 1 || rating > 5){
+  alert("Rating must be between 1 and 5");
+  return;
+}
+
+const review = prompt("Write your review:");
+
+const allOrders =
+  JSON.parse(localStorage.getItem("orders")) || [];
+
+const index = allOrders.findIndex(
+  o => o.id === orderId
+);
+
+if(index !== -1){
+
+  allOrders[index].rating = rating;
+  allOrders[index].review = review;
+
+  localStorage.setItem(
+    "orders",
+    JSON.stringify(allOrders)
+  );
+
+  orders = allOrders.filter(
+    o => o.userEmail === currentUser.email
+  );
+
+  filterOrders("Completed");
+}
+
+alert("Thank you for your review!");
+}
+
+let selectedRating = 0;
+let selectedOrderId = null;
+
+function openReviewModal(orderId){
+  selectedOrderId = orderId;
+  selectedRating = 0;
+
+  document.getElementById("reviewText").value = "";
+
+  document.querySelectorAll(".star").forEach(star=>{
+    star.classList.remove("active");
+  });
+
+  document.getElementById("reviewModal").style.display = "block";
+}
+
+function closeReviewModal(){
+  document.getElementById("reviewModal").style.display = "none";
+}
+
+function setRating(rating){
+
+  selectedRating = rating;
+
+  const stars =
+  document.querySelectorAll(".star");
+
+  stars.forEach((star,index)=>{
+
+    if(index < rating){
+      star.classList.add("active");
+    }else{
+      star.classList.remove("active");
+    }
+
+  });
+
+}
+
+function submitReview(){
+
+  if(selectedRating === 0){
+    alert("Please select a rating.");
+    return;
+  }
+
+  const review =
+  document.getElementById("reviewText").value;
+
+  const allOrders =
+  JSON.parse(localStorage.getItem("orders")) || [];
+
+  const index =
+  allOrders.findIndex(
+    o => o.id === selectedOrderId
+  );
+
+  if(index !== -1){
+
+    allOrders[index].rating =
+    selectedRating;
+
+    allOrders[index].review =
+    review;
+
+    localStorage.setItem(
+      "orders",
+      JSON.stringify(allOrders)
+    );
+
+    orders =
+    allOrders.filter(
+      o => o.userEmail === currentUser.email
+    );
+
+    closeReviewModal();
+
+    filterOrders("Completed");
+
+    alert("Thank you for your review!");
+  }
+
+}
+  
+</script>
+
+    <!-- REVIEW MODAL -->
+<div id="reviewModal" class="modal">
+  <div class="modal-content" style="max-width:500px;">
+
+    <span class="close-btn" onclick="closeReviewModal()">
+      &times;
+    </span>
+
+    <h2>⭐ Rate & Review</h2>
+
+    <div style="text-align:center;margin:20px 0;">
+
+      <span class="star" onclick="setRating(1)">⭐</span>
+      <span class="star" onclick="setRating(2)">⭐</span>
+      <span class="star" onclick="setRating(3)">⭐</span>
+      <span class="star" onclick="setRating(4)">⭐</span>
+      <span class="star" onclick="setRating(5)">⭐</span>
+
+    </div>
+
+    <textarea
+      id="reviewText"
+      placeholder="Write your review..."
+      style="
+      width:100%;
+      height:120px;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid #ccc;
+      resize:none;">
+    </textarea>
+
+    <button
+      onclick="submitReview()"
+      style="
+      margin-top:15px;
+      width:100%;
+      background:#6f4e37;
+      color:white;
+      border:none;
+      padding:12px;
+      border-radius:10px;
+      cursor:pointer;">
+      Submit Review
+    </button>
+
+  </div>
+</div>
+</body>
+</html>

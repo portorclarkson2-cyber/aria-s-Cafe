@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News & Articles - Aria's Cafe</title>
+  <link rel="stylesheet" href="dcsa.css">
+
+  <style>
+    /* ==========================================
+       NEWS & ARTICLES PAGE
+       ========================================== */
+    
+    .news-section {
+      padding: 65px 7% 80px;
+      background: #f5f0e6;
+      min-height: 650px;
+    }
+    
+    /* PAGE TITLE */
+    .news-title {
+      text-align: center;
+      font-size: 40px;
+      font-weight: 700;
+      margin: 10px 0 45px;
+      color: #8b4513;
+    }
+    
+    /* NEWS GRID */
+    .news-container {
+      width: 100%;
+      max-width: 1150px;
+      margin: 0 auto;
+    
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    
+      align-items: stretch;
+    }
+    
+    /* ==========================================
+       NEWS CARD
+       ========================================== */
+    
+    .news-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+    
+      box-shadow: 0 5px 18px rgba(93, 61, 35, 0.13);
+    
+      display: flex;
+      flex-direction: column;
+    
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+    
+    /* HOVER */
+    .news-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(93, 61, 35, 0.20);
+    }
+    
+    /* ==========================================
+       NEWS IMAGE
+       ========================================== */
+    
+    .news-card img {
+      width: 100%;
+      height: 185px;
+    
+      display: block;
+    
+      object-fit: cover;
+      object-position: center;
+    
+      background: #eadcc7;
+    }
+    
+    /* ==========================================
+       NEWS CONTENT
+       ========================================== */
+    
+    .news-content {
+      padding: 20px 21px 22px;
+    
+      display: flex;
+      flex-direction: column;
+    
+      flex: 1;
+    }
+    
+    /* ARTICLE TITLE */
+    
+    .news-content h3 {
+      margin: 0 0 10px;
+    
+      color: #8b4513;
+    
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+    
+    /* ARTICLE DESCRIPTION */
+    
+    .news-content p {
+      margin: 0 0 18px;
+    
+      color: #555;
+    
+      font-size: 14px;
+      line-height: 1.7;
+    
+      flex: 1;
+    }
+    
+    /* READ MORE */
+    
+    .read-more {
+      display: inline-block;
+    
+      color: #b5651d;
+    
+      font-size: 14px;
+      font-weight: 700;
+    
+      text-decoration: none;
+    
+      cursor: pointer;
+    
+      transition: 0.25s ease;
+    }
+    
+    .read-more:hover {
+      color: #8b4513;
+      transform: translateX(4px);
+    }
+    
+    
+    /* ==========================================
+       NO NEWS MESSAGE
+       ========================================== */
+    
+    .news-container > p {
+      width: 100%;
+    
+      padding: 40px 20px;
+    
+      background: #fff;
+    
+      border-radius: 14px;
+    
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    
+    /* ==========================================
+       TABLET
+       ========================================== */
+    
+    @media (max-width: 1000px) {
+    
+      .news-section {
+        padding: 55px 5% 70px;
+      }
+    
+      .news-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+      }
+    
+    }
+    
+    
+    /* ==========================================
+       MOBILE
+       ========================================== */
+    
+    @media (max-width: 650px) {
+    
+      .news-section {
+        padding: 45px 20px 60px;
+      }
+    
+      .news-title {
+        font-size: 32px;
+        margin-bottom: 35px;
+      }
+    
+      .news-container {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+    
+      .news-card img {
+        height: 190px;
+      }
+    
+      .news-content {
+        padding: 18px;
+      }
+    
+      .news-content h3 {
+        font-size: 19px;
+      }
+    
+      .news-content p {
+        font-size: 14px;
+      }
+    
+    }
+    
+    
+    /* ==========================================
+       VERY SMALL SCREEN
+       ========================================== */
+    
+    @media (max-width: 400px) {
+    
+      .news-section {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    
+      .news-title {
+        font-size: 28px;
+      }
+    
+      .news-card img {
+        height: 170px;
+      }
+    
+    }
+    </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="img/olog.jpg" alt="Datamex Logo" style="width: 50px; height: 50px;">
+      <strong>Aria's Cafe</strong>
+    </div>
+    
+    <div class="nav-buttons">
+      <button class="btn" onclick="window.location.href='index.html'">Home</button>
+      <div class="dropdown">
+        <button class="btn">About Us ▼</button>
+        <div class="dropdown-content">
+          <button onclick="window.location.href='history.html'">Our History</button>   
+          <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+        </div>
+      </div>
+
+      <button class="btn" onclick="window.location.href='news.html'">News & Articles</button>
+    </div>
+
+    <button class="btn" onclick="window.location.href='menu.html'">Menu</button>
+  </div>
+
+    <button class="btn" onclick="window.location.href='contact.html'">Contact Us</button>
+  </div>
+
+  </div>
+  <button class="btn" onclick="window.location.href='reservation.html'">Reservation</button>
+</div>
+
+    <div class="profile-wrapper" id="profileWrapper">
+      <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false">☰</button>
+      <ul id="profileMenu" class="profile-menu">
+        <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+        <li><a href="login.html" id="logoutBtn" class="profile-item">➜] Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+  <!-- ===== NEWS SECTION ===== -->
+  <section class="news-section">
+
+    <h1 class="news-title">Latest News & Articles</h1>
+  
+    <div
+      class="news-container"
+      id="newsContainer">
+    </div>
+  
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      
+      <div class="footer-section">
+        <h2>📍 Branches</h2>
+        <p>Parañaque, Metro Manila</p>
+        <p>Pasay City, Metro Manila</p>
+        <p>Caloocan City, Metro Manila</p>
+      </div>
+
+      <div class="footer-section">
+        <h2>📞 Contact</h2>
+        <p>+63-929-551-5005</p>
+        <p>+63-926-395-8937</p>
+        <p>Email: <a href="mailto:info@ariascafe.com">info@ariascafe.com</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Aria's Cafe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+
+    function renderNews(){
+    
+      const news =
+        JSON.parse(localStorage.getItem("news")) || [];
+    
+      const container =
+        document.getElementById("newsContainer");
+    
+      if(!container) return;
+    
+      const publishedNews =
+        news.filter(article =>
+          article.status === "Published"
+        );
+    
+      if(publishedNews.length === 0){
+    
+        container.innerHTML = `
+          <p style="
+            text-align:center;
+            grid-column:1/-1;
+            font-size:18px;
+            color:#8b4513;
+          ">
+            No news articles available.
+          </p>
+        `;
+    
+        return;
+      }
+    
+      container.innerHTML =
+        publishedNews.map(article => `
+    
+          <div class="news-card">
+    
+            <img
+              src="${article.image}"
+              alt="${article.title}"
+            >
+    
+            <div class="news-content">
+    
+              <h3>
+                ${article.title}
+              </h3>
+    
+              <p>
+                ${article.description}
+              </p>
+    
+              <span class="read-more">
+                Read More →
+              </span>
+    
+            </div>
+    
+          </div>
+    
+        `).join("");
+    
+    }
+    
+    renderNews();
+    
+    </script>
+
+  <script src="dcsa.js"></script>
+</body>
+</html>

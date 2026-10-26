@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Aria</title>
+  <!-- Font Awesome for eye icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background-image: url("img/gb.jpg");
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ====== LOGIN CARD ====== */
+    .login-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 40px 35px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .login-box img {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: #f4eeee;
+    }
+
+    /* ====== INPUTS ====== */
+    .input-group {
+      position: relative;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border: 1px solid #004080; 
+      box-shadow: 0 0 6px rgba(0,64,128,0.3);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #555;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    .toggle-password:hover {
+      color: #000;
+    }
+
+    /* ====== BUTTON ====== */
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #e6dada, #f3bc69); 
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background: linear-gradient(135deg, #beb1b1, #d4a45b); 
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25); 
+    } 
+
+    /* ====== LINKS ====== */
+    .login-box p {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .login-box a {
+      color: #dfe2e4; 
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+
+    #msg {
+      margin-top: 12px;
+      font-size: 14px;
+      color: red;
+      font-weight: bold;
+    }
+
+    /* ====== ANIMATION ====== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 420px) {
+      .login-box {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="img/olog.jpg" alt="Aria Logo">
+    <h2>Login</h2>
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Email" required>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required>
+      <i class="fa-solid fa-eye toggle-password" id="togglePassword" onclick="togglePassword()"></i>
+    </div>
+
+    <button onclick="login()">Login</button>
+    <p>Don’t have an account? <a href="register.html">Register</a></p>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const password = document.getElementById("password");
+      const toggle = document.getElementById("togglePassword");
+    
+      if (password.type === "password") {
+        password.type = "text";
+        toggle.classList.remove("fa-eye");
+        toggle.classList.add("fa-eye-slash");
+      } else {
+        password.type = "password";
+        toggle.classList.remove("fa-eye-slash");
+        toggle.classList.add("fa-eye");
+      }
+    }
+    
+    // LOGIN FUNCTION
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("msg");
+    
+      msg.innerText = "";
+    
+      try {
+        const res = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })
+        });
+    
+        const data = await res.json();
+    
+        if (!res.ok) {
+          msg.innerText = data.message;
+          return;
+        }
+
+        console.log(data.user);
+
+    
+        // SAVE USER
+        localStorage.setItem("currentUser", JSON.stringify(data.user));
+    
+        // REDIRECT BASED ON ROLE
+        if (data.user.role === "admin") {
+          window.location.href = "admin.html";
+        } else {
+          window.location.href = "index.html";
+        }
+    
+      } catch (err) {
+        console.error(err);
+        msg.innerText = "Server error";
+      }
+    }
+    </script>
+</body>
+</html>

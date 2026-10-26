@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Aria's Cafe</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4}
+nav{display:flex;justify-content:space-between;align-items:center;background:brown;color:white;padding:15px}
+.btn{padding:8px 12px;background:white;color:brown;border:none;border-radius:5px;cursor:pointer}
+.admin-container{padding:40px;max-width:1000px;margin:auto}
+.admin-card{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin-bottom:20px}
+.admin-table{width:100%;border-collapse:collapse;margin-top:15px}
+.admin-table th,.admin-table td{border-bottom:1px solid #ddd;padding:12px;text-align:left}
+.form-group{margin-bottom:15px;display:flex;flex-direction:column}
+.form-group input,.form-group select{padding:10px;border-radius:5px;border:1px solid #ccc;margin-bottom:8px}
+.status-badge{padding:5px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.status-pending{background:#fef9c3;color:#854d0e}
+.status-receive{background:#3498db;color:white;}
+.status-ship{background: #e8ec05; color: white;}
+.status-rejected{background:#e74c3c;color:white;}
+.status-complete{background:#dcfce7;color:#166534}
+/* CONTACT SECTION */
+.admin-card h3{
+  margin-top:0;
+  color:brown;
+}
+
+.admin-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+.admin-table th{
+  background:#ecc978;
+  color:white;
+  padding:12px;
+}
+
+.admin-table td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  vertical-align:top;
+}
+
+.admin-table tr:hover{
+  background:#fafafa;
+}
+
+/* CONTACT MESSAGE BOX */
+.message-cell{
+  max-width:250px;
+  white-space:normal;
+  word-wrap:break-word;
+}
+
+.review-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+.review-table th,
+.review-table td{
+  border:1px solid #ddd;
+  padding:12px;
+  text-align:left;
+}
+
+.review-table th{
+  background:#ecc978;
+  color:white;
+}
+
+.review-table tr:nth-child(even){
+  background:#f9f9f9;
+}
+
+.review-stars{
+  color:gold;
+  font-size:18px;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+<strong>☕ Aria's Cafe Admin</strong>
+<div>
+<button class="btn" onclick="logout()">Logout</button>
+</div>
+</nav>
+
+<div class="admin-container">
+<h2>🛠️ Control Center</h2>
+
+<!-- ADD MENU -->
+<div class="admin-card">
+<h3>Add New Menu Item</h3>
+<div class="form-group">
+<input type="text" id="pName" placeholder="Item Name">
+<input type="number" id="pPrice" placeholder="Price (₱)">
+<input type="text" id="pImg" placeholder="Image Path (img/example.jpg)">
+<input type="text" id="pDescription" placeholder="Description">
+<select id="pCategory">
+<option value="Milk Tea">Milk Tea</option>
+<option value="Refreshers">Refreshers</option>
+</select>
+<button onclick="addProduct()">Add Item</button>
+</div>
+</div>
+
+<!-- NEWS & ARTICLES -->
+<div class="admin-card">
+  <h3>📰 News & Articles</h3>
+
+  <div class="form-group">
+    <input type="hidden" id="newsEditIndex">
+
+    <input
+      type="text"
+      id="newsTitle"
+      placeholder="Article Title"
+    >
+
+    <textarea
+      id="newsDescription"
+      placeholder="Article Description"
+      rows="4"
+      style="padding:10px;border-radius:5px;border:1px solid #ccc;resize:vertical;"
+    ></textarea>
+
+    <input
+      type="text"
+      id="newsImage"
+      placeholder="Image Path (example: img/news1.jpg)"
+    >
+
+    <select id="newsStatus">
+      <option value="Published">Published</option>
+      <option value="Hidden">Hidden</option>
+    </select>
+
+    <button onclick="saveNews()">➕ Add Article</button>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="newsAdminBody"></tbody>
+  </table>
+</div>
+
+<!-- ORDERS -->
+<div class="admin-card">
+<h3>Incoming Orders</h3>
+<table class="admin-table">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Customer</th>
+    <th>Items</th>
+    <th>Total</th>
+    <th>Payment</th>
+    <th>Reference</th>
+    <th>Address</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+</thead>
+<tbody id="adminOrdersBody"></tbody>
+</table>
+</div>
+
+<div class="admin-card">
+  <h2>⭐ Customer Reviews</h2>
+
+  <table class="review-table">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Product</th>
+        <th>Rating</th>
+        <th>Review</th>
+      </tr>
+    </thead>
+
+    <tbody id="reviewsTableBody">
+    </tbody>
+  </table>
+</div>
+
+
+<div class="admin-card">
+    <h3>📅 Reservations</h3>
+    
+    <table class="admin-table">
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Guests</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    
+    <tbody id="reservationBody"></tbody>
+    </table>
+    </div>
+
+    <div class="admin-card">
+      <h3>📩 Contact Messages</h3>
+    
+      <table class="admin-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="contactTable"></tbody>
+</table>
+</div>
+
+    <div class="admin-card">
+      <h3>Menu Items</h3>
+      
+      <table class="admin-table">
+      <thead>
+      <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Action</th>
+      </tr>
+      </thead>
+      
+      <tbody id="menuBody"></tbody>
+      </table>
+      </div>
+
+<script>
+
+// LOAD ORDERS
+window.onload = function(){
+  renderAdminOrders();
+  renderReservations();
+  renderMenu(); 
+  renderContacts();
+  loadReviews();
+  renderNewsAdmin();
+}
+
+// ===== RENDER ADMIN ORDERS =====
+function renderAdminOrders() {
+
+const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const body = document.getElementById("adminOrdersBody");
+
+if (!body) return;
+
+// EMPTY STATE
+if (orders.length === 0) {
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="8" style="text-align:center; padding:20px;">
+        No orders found
+      </td>
+    </tr>
+  `;
+
+  return;
+}
+
+body.innerHTML = orders.map((order, index) => {
+
+  // STATUS DESIGN
+  let statusClass = "status-pending";
+
+if(order.status === "Completed"){
+  statusClass = "status-complete";
+}
+else if(order.status === "To Ship"){
+  statusClass = "status-ship";
+}
+else if(order.status === "To Receive"){
+  statusClass = "status-receive";
+}
+else if(order.status === "Rejected"){
+  statusClass = "status-rejected";
+}
+
+  // ITEMS
+  const items = Array.isArray(order.items)
+    ? order.items.join(", ")
+    : order.items;
+
+    return `
+
+<tr>
+
+  <td>#${index + 1}</td>
+
+  <td>${order.userName}</td>
+
+  <td>${order.itemName}</td>
+
+  <td>₱${order.total || 0}</td>
+
+  <td>${order.payment || "N/A"}</td>
+
+  <td>${order.referenceNumber || "-"}</td>
+
+  <td>${order.address || "N/A"}</td>
+
+  <td>
+    <span class="status-badge ${statusClass}">
+      ${order.status || "Pending"}
+    </span>
+  </td>
+
+  <td>
+
+<button onclick="shipOrder(${index})">📦</button>
+
+<button onclick="receivedOrder(${index})">🚚</button>
+
+<button onclick="completeOrder(${index})">✔</button>
+
+<button onclick="rejectOrder(${index})">❌</button>
+
+<button onclick="deleteOrder(${index})">🗑️</button>
+
+</td>
+</tr>
+
+`;
+
+
+}).join("");
+
+}
+
+// ==========================================
+// NEWS & ARTICLES MANAGEMENT
+// ==========================================
+
+function saveNews(){
+
+const title =
+  document.getElementById("newsTitle").value.trim();
+
+const description =
+  document.getElementById("newsDescription").value.trim();
+
+const image =
+  document.getElementById("newsImage").value.trim();
+
+const status =
+  document.getElementById("newsStatus").value;
+
+const editIndex =
+  document.getElementById("newsEditIndex").value;
+
+if(!title || !description || !image){
+
+  alert("Please complete all article fields.");
+  return;
+}
+
+let news =
+  JSON.parse(localStorage.getItem("news")) || [];
+
+const article = {
+  title: title,
+  description: description,
+  image: image,
+  status: status,
+  date: new Date().toLocaleDateString()
+};
+
+// EDIT
+if(editIndex !== ""){
+
+  news[Number(editIndex)] = article;
+
+  alert("✅ Article updated!");
+
+}else{
+
+  // ADD
+  news.push(article);
+
+  alert("✅ Article added!");
+
+}
+
+localStorage.setItem(
+  "news",
+  JSON.stringify(news)
+);
+
+clearNewsForm();
+renderNewsAdmin();
+}
+
+
+// ==========================================
+// DISPLAY NEWS IN ADMIN
+// ==========================================
+
+function renderNewsAdmin(){
+
+const news =
+  JSON.parse(localStorage.getItem("news")) || [];
+
+const body =
+  document.getElementById("newsAdminBody");
+
+if(!body) return;
+
+if(news.length === 0){
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="5"
+          style="text-align:center;padding:20px;">
+        No news articles found.
+      </td>
+    </tr>
+  `;
+
+  return;
+}
+
+body.innerHTML = news.map((article,index)=>`
+
+  <tr>
+
+    <td>
+      <img
+        src="${article.image}"
+        alt="${article.title}"
+        style="
+          width:80px;
+          height:60px;
+          object-fit:cover;
+          border-radius:8px;
+        "
+      >
+    </td>
+
+    <td>
+      <strong>${article.title}</strong>
+    </td>
+
+    <td class="message-cell">
+      ${article.description}
+    </td>
+
+    <td>
+
+      <span class="status-badge ${
+        article.status === "Published"
+        ? "status-complete"
+        : "status-rejected"
+      }">
+
+        ${article.status}
+
+      </span>
+
+    </td>
+
+    <td>
+
+      <button onclick="editNews(${index})">
+        ✎
+      </button>
+
+      <button onclick="toggleNews(${index})">
+        👁
+      </button>
+
+      <button onclick="deleteNews(${index})">
+        🗑️
+      </button>
+
+    </td>
+
+  </tr>
+
+`).join("");
+
+}
+
+
+// ==========================================
+// EDIT NEWS
+// ==========================================
+
+function editNews(index){
+
+const news =
+  JSON.parse(localStorage.getItem("news")) || [];
+
+const article = news[index];
+
+document.getElementById("newsTitle").value =
+  article.title;
+
+document.getElementById("newsDescription").value =
+  article.description;
+
+document.getElementById("newsImage").value =
+  article.image;
+
+document.getElementById("newsStatus").value =
+  article.status;
+
+document.getElementById("newsEditIndex").value =
+  index;
+
+window.scrollTo({
+  top: 0,
+  behavior: "smooth"
+});
+
+}
+
+
+// ==========================================
+// HIDE / PUBLISH NEWS
+// ==========================================
+
+function toggleNews(index){
+
+let news =
+  JSON.parse(localStorage.getItem("news")) || [];
+
+if(news[index].status === "Published"){
+
+  news[index].status = "Hidden";
+
+}else{
+
+  news[index].status = "Published";
+
+}
+
+localStorage.setItem(
+  "news",
+  JSON.stringify(news)
+);
+
+renderNewsAdmin();
+
+}
+
+
+// ==========================================
+// DELETE NEWS
+// ==========================================
+
+function deleteNews(index){
+
+let news =
+  JSON.parse(localStorage.getItem("news")) || [];
+
+if(!confirm("Delete this article?")){
+  return;
+}
+
+news.splice(index,1);
+
+localStorage.setItem(
+  "news",
+  JSON.stringify(news)
+);
+
+renderNewsAdmin();
+
+}
+
+
+// ==========================================
+// CLEAR FORM
+// ==========================================
+
+function clearNewsForm(){
+
+document.getElementById("newsTitle").value = "";
+
+document.getElementById("newsDescription").value = "";
+
+document.getElementById("newsImage").value = "";
+
+document.getElementById("newsStatus").value =
+  "Published";
+
+document.getElementById("newsEditIndex").value = "";
+
+}
+
+
+
+// ===== SHIP ORDER =====
+function shipOrder(index) {
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+orders[index].status = "To Ship";
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+renderAdminOrders();
+
+}
+
+
+
+// ===== RECEIVED ORDER =====
+function receivedOrder(index) {
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+orders[index].status = "To Receive";
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+renderAdminOrders();
+
+}
+
+
+
+// ===== COMPLETE ORDER =====
+function completeOrder(index) {
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+orders[index].status = "Completed";
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+renderAdminOrders();
+
+}
+
+
+
+// ===== DELETE ORDER =====
+function deleteOrder(index) {
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const confirmDelete = confirm("Delete this order?");
+
+if (!confirmDelete) return;
+
+orders.splice(index, 1);
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+renderAdminOrders();
+
+}
+
+
+
+// ===== LOAD ORDERS =====
+renderAdminOrders();
+// ADD MENU ITEM
+function addProduct(){
+
+let name = document.getElementById("pName").value.trim();
+let description = document.getElementById("pDescription").value.trim();
+let price = document.getElementById("pPrice").value;
+let img = document.getElementById("pImg").value.trim();
+let category = document.getElementById("pCategory").value;
+
+if(!name || !description || !price || !img){
+  alert("Please complete all menu item fields.");
+  return;
+}
+
+let menu =
+  JSON.parse(localStorage.getItem("menu")) || [];
+
+menu.push({
+  name: name,
+  description: description,
+  price: Number(price),
+  img: img,
+  category: category
+});
+
+localStorage.setItem(
+  "menu",
+  JSON.stringify(menu)
+);
+
+alert("✅ Item added to menu!");
+
+document.getElementById("pName").value = "";
+document.getElementById("pDescription").value = "";
+document.getElementById("pPrice").value = "";
+document.getElementById("pImg").value = "";
+
+renderMenu();
+}
+
+
+function renderReservations(){
+
+const reservations =
+JSON.parse(localStorage.getItem("reservations")) || [];
+
+const body =
+document.getElementById("reservationBody");
+
+body.innerHTML = reservations.map((r,index)=>{
+
+  let statusClass = "status-pending";
+
+  if(r.status === "Confirmed"){
+  statusClass = "status-ship";
+}
+else if(r.status === "Completed"){
+  statusClass = "status-complete";
+}
+else if(r.status === "Cancelled"){
+  statusClass = "status-rejected";
+}
+else if(r.status === "Rejected"){
+  statusClass = "status-rejected";
+}
+
+  return `
+    <tr>
+
+      <td>#${index+1}</td>
+
+      <td>${r.name}</td>
+
+      <td>${r.phone}</td>
+
+      <td>${r.date}</td>
+
+      <td>${r.time}</td>
+
+      <td>${r.guests}</td>
+
+      <td>
+        <span class="status-badge ${statusClass}">
+          ${r.status || "Pending"}
+        </span>
+      </td>
+
+      <td>
+
+<button onclick="confirmReservation(${index})" title="Confirm Reservation">
+  👍
+</button>
+
+<button onclick="rejectReservation(${index})" title="Reject Reservation">
+  🚫
+</button>
+
+<button onclick="completeReservation(${index})" title="Complete Reservation">
+  ✅
+</button>
+
+<button onclick="cancelReservation(${index})" title="Cancel Reservation">
+  ❌
+</button>
+
+<button onclick="deleteReservation(${index})" title="Delete Reservation">
+  🗑️
+</button>
+
+      </td>
+
+    </tr>
+  `;
+
+}).join("");
+
+}
+
+function rejectReservation(index){
+
+let reservations =
+  JSON.parse(localStorage.getItem("reservations")) || [];
+
+const reservation = reservations[index];
+
+const reason = prompt(
+  "Reason for rejecting this reservation?\n\n" +
+  "Example:\n" +
+  "- Full reservation for this time\n" +
+  "- No available tables\n" +
+  "- Too many guests for this time slot"
+);
+
+if(!reason || !reason.trim()){
+  return;
+}
+
+reservations[index].status = "Rejected";
+reservations[index].rejectReason = reason.trim();
+
+localStorage.setItem(
+  "reservations",
+  JSON.stringify(reservations)
+);
+
+renderReservations();
+
+alert("❌ Reservation rejected.");
+} 
+
+function deleteReservation(i){
+  let reservations = JSON.parse(localStorage.getItem("reservations"));
+  reservations.splice(i,1);
+  localStorage.setItem("reservations", JSON.stringify(reservations));
+  renderReservations();
+}
+
+function logout(){
+  location.href='login.html';
+}
+
+function renderMenu(){
+  const menu = JSON.parse(localStorage.getItem("menu")) || [];
+  const body = document.getElementById("menuBody");
+
+  body.innerHTML = menu.map((item,index)=>`
+    <tr>
+      <td>${item.name}</td>
+      <td>₱${item.price}</td>
+      <td>${item.category}</td>
+      <td>
+        <button class="admin-btn delete-btn" onclick="deleteMenu(${index})">🗑</button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function deleteMenu(i){
+  let menu = JSON.parse(localStorage.getItem("menu"));
+  menu.splice(i,1); // remove item
+  localStorage.setItem("menu", JSON.stringify(menu));
+  renderMenu();
+}
+
+const users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+let allOrders = [];
+
+users.forEach(user => {
+
+  const userOrders =
+  JSON.parse(
+    localStorage.getItem(
+      "orders_" + user.email
+    )
+  ) || [];
+
+  allOrders.push(...userOrders);
+
+});
+
+console.log(allOrders);
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+
+// ===== CONTACT MESSAGES =====
+
+function renderContacts(){
+
+const contacts =
+JSON.parse(localStorage.getItem("contacts")) || [];
+
+const table =
+document.getElementById("contactTable");
+
+if(!table) return;
+
+if(contacts.length === 0){
+
+  table.innerHTML = `
+    <tr>
+      <td colspan="7" style="text-align:center;padding:20px;">
+        No contact messages found
+      </td>
+    </tr>
+  `;
+
+  return;
+}
+
+table.innerHTML = contacts.map((contact,index)=>`
+
+  <tr>
+
+    <td>${contact.name || "-"}</td>
+
+    <td>${contact.email || "-"}</td>
+
+    <td>${contact.phone || "-"}</td>
+
+    <td>${contact.subject || "-"}</td>
+
+    <td>${contact.message || "-"}</td>
+
+    <td>${contact.date || "-"}</td>
+
+    <td>
+
+      <button onclick="deleteContact(${index})">
+        🗑️
+      </button>
+
+    </td>
+
+  </tr>
+
+`).join("");
+
+}
+
+
+function deleteContact(index){
+
+let contacts =
+JSON.parse(localStorage.getItem("contacts")) || [];
+
+const confirmDelete =
+confirm("Delete this message?");
+
+if(!confirmDelete) return;
+
+contacts.splice(index,1);
+
+localStorage.setItem(
+  "contacts",
+  JSON.stringify(contacts)
+);
+
+renderContacts();
+
+}
+
+function verifyPayment(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+orders[index].status =
+"Payment Verified";
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+renderAdminOrders();
+
+}
+
+function rejectOrder(index){
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+const reason = prompt(
+  "Reason for rejection?\n\nExample:\n- Invalid reference number\n- Item sold out"
+);
+
+if(!reason) return;
+
+orders[index].status = "Rejected";
+orders[index].rejectReason = reason;
+
+localStorage.setItem(
+  "orders",
+  JSON.stringify(orders)
+);
+
+renderAdminOrders();
+
+}
+
+function confirmReservation(index){
+
+let reservations =
+JSON.parse(localStorage.getItem("reservations")) || [];
+
+reservations[index].status =
+"Confirmed";
+
+localStorage.setItem(
+"reservations",
+JSON.stringify(reservations)
+);
+
+renderReservations();
+}
+
+function completeReservation(index){
+
+let reservations =
+JSON.parse(localStorage.getItem("reservations")) || [];
+
+reservations[index].status =
+"Completed";
+
+localStorage.setItem(
+"reservations",
+JSON.stringify(reservations)
+);
+
+renderReservations();
+}
+
+function cancelReservation(index){
+
+let reservations =
+JSON.parse(localStorage.getItem("reservations")) || [];
+
+reservations[index].status =
+"Cancelled";
+
+localStorage.setItem(
+"reservations",
+JSON.stringify(reservations)
+);
+
+renderReservations();
+}
+
+function loadReviews(){
+
+const orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+const tbody =
+document.getElementById("reviewsTableBody");
+
+tbody.innerHTML = "";
+
+const reviewedOrders =
+orders.filter(order => order.review);
+
+if(reviewedOrders.length === 0){
+
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="4" style="text-align:center;">
+        No reviews yet.
+      </td>
+    </tr>
+  `;
+
+  return;
+}
+
+reviewedOrders.forEach(order => {
+
+  tbody.innerHTML += `
+    <tr>
+      <td>${order.customerName || order.name || "Customer"}</td>
+      <td>${order.itemName}</td>
+      <td class="review-stars">
+        ${"⭐".repeat(order.rating)}
+      </td>
+      <td>${order.review}</td>
+    </tr>
+  `;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

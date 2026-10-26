@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Aria</title>
+  <!-- Font Awesome for eye icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  /* ====== GLOBAL ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("img/gb.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ====== REGISTER CARD ====== */
+.register-box {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  padding: 40px 35px;
+  width: 370px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.8s ease;
+}
+
+.register-box img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid rgba(255,255,255,0.5);
+}
+
+.register-box h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ====== INPUT GROUP ====== */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 13px 45px 13px 15px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.9);
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+/* ====== SELECT DESIGN ====== */
+.input-group select {
+  appearance: none;
+  cursor: pointer;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ====== PASSWORD EYE ====== */
+.toggle-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 17px;
+  transition: 0.3s;
+}
+
+.toggle-password:hover {
+  color: #000;
+}
+
+/* ====== BUTTON ====== */
+.register-box button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #d89b4a, #f7c873);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.register-box button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #c9852f, #e8b14f);
+}
+
+/* ====== TEXT ====== */
+.register-box p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #f1f1f1;
+}
+
+.register-box a {
+  color: #ffd27f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-box a:hover {
+  text-decoration: underline;
+}
+
+#msg {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #ffb3b3;
+  min-height: 18px;
+  font-weight: bold;
+}
+
+/* ====== ANIMATION ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 420px) {
+  .register-box {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <img src="img/olog.jpg" alt="Datamex Logo">
+    <h2>Create Account</h2>
+
+    <div class="input-group">
+      <input type="text" id="name" placeholder="Full Name" required>
+    </div>
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Email" required>
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="number" placeholder="Contact Number" required>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required>
+      <i class="fa-solid fa-eye toggle-password" id="togglePassword1" onclick="togglePassword('password', 'togglePassword1')"></i>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <i class="fa-solid fa-eye toggle-password" id="togglePassword2" onclick="togglePassword('confirmPassword', 'togglePassword2')"></i>
+    </div> 
+
+    <div class="input-group">
+      <select id="role" required>
+        <option value="user">👤 User</option>
+      </select>
+    </div>
+
+    <button onclick="register()">Register</button>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, iconId) {
+      const field = document.getElementById(fieldId);
+      const icon = document.getElementById(iconId);
+
+      if (field.type === "password") {
+        field.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        field.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+
+    async function register() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const number = document.getElementById("number").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const role = document.getElementById("role").value;
+      const msg = document.getElementById("msg");
+
+      msg.textContent = "";
+
+      // ✅ Check required fields
+  if (!name || !email || !number || !password) {
+    msg.style.color = "red";
+    msg.innerText = "Please fill all required fields!";
+    return;
+  }
+
+  // ✅ Gmail validation
+  const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+  if (!gmailPattern.test(email)) {
+    msg.style.color = "red";
+    msg.innerText = "Please enter a valid Gmail address (example@gmail.com)";
+    return;
+  }
+
+  // ✅ Contact number validation (11 digits)
+  const numberPattern = /^\d{11}$/;
+  if (!numberPattern.test(number)) {
+    msg.style.color = "red";
+    msg.innerText = "Contact number must be exactly 11 digits.";
+    return;
+  }
+
+  // ✅ Password validation: min 8 chars, 1 uppercase, 1 lowercase, 1 number
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  if (!passwordPattern.test(password)) {
+    msg.style.color = "red";
+    msg.innerText = "Password must be at least 8 characters and include uppercase, lowercase, and a number.";
+    return;
+  }
+
+  if (password !== confirmPassword) {
+  msg.style.color = "red";
+  msg.innerText = "Passwords do not match!";
+  return;
+}
+
+      try {
+        const res = await fetch("http://localhost:3000/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name,
+    email,
+    number,
+    password,
+    role
+  })
+});
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("✅ Registration successful! You can now log in.");
+          window.location.href = "login.html";
+        } else {
+          msg.textContent = data.message || "⚠ Registration failed.";
+        }
+      } catch (err) {
+        msg.textContent = "Server error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>

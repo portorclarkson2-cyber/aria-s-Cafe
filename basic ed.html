@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic ed - Datamex College Of Saint Adeline</title>
+  <link rel="stylesheet" href="dcsa.css">
+</head>
+<style>
+.main-content {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 40px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.info-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #4F46E5;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.requirements {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.requirement-box {
+  background: linear-gradient(145deg, #f9f9ff, #eef0ff);
+  border: 2px solid #e0e3ff;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: left;
+  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.1);
+  transition: all 0.3s ease;
+}
+
+.requirement-box:hover {
+  background: linear-gradient(145deg, #f0f3ff, #e9ecff);
+  transform: translateY(-6px);
+}
+
+.requirement-box h2 {
+  color: #4338CA;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  border-left: 5px solid #4F46E5;
+  padding-left: 12px;
+  font-weight: 700;
+}
+
+.requirement-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.requirement-box ul li {
+  font-size: 1rem;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  border-bottom: 1px dashed #d8d8ff;
+}
+
+.requirement-box ul li:last-child {
+  border-bottom: none;
+}
+
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  .requirement-box {
+    padding: 20px;
+  }
+}
+
+</style>
+<body>
+
+<!-- ===== NAVIGATION BAR ===== -->
+<nav>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <img src="img/logo.jpg" alt="Datamex Logo" style="width: 50px; height: 50px;">
+    <strong>Datamex College Of Saint Adeline</strong>
+  </div>
+  
+  <div class="nav-buttons">
+    <button class="btn" onclick="window.location.href='index.html'">Home</button>
+    <div class="dropdown">
+      <button class="btn">About Us ▼</button>
+      <div class="dropdown-content">
+        <button onclick="window.location.href='history.html'">Our History</button>   
+        <button onclick="window.location.href='mission.html'">Our Mission & Vision</button>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="btn">Admission ▼</button>
+      <div class="dropdown-content">
+        <button onclick="window.location.href='basic ed.html'">Basic Education</button>   
+        <button onclick="window.location.href='seniorhigh.html'">Senior High</button>
+        <button onclick="window.location.href='college.html'" >College</button>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="btn">Programs ▼</button>
+      <div class="dropdown-content">
+        <button onclick="window.location.href='online.html'">Online Education</button>
+        <button onclick="window.location.href='probasic-ed.html'">Basic Education</button>   
+        <button onclick="window.location.href='pro-shs.html'">Senior High</button>
+        <button onclick="window.location.href='pro-college.html'" >College</button>
+      </div>
+    </div>
+    <button class="btn" onclick="window.location.href='portal.html'">Portal</button>
+    <button class="btn-outline" onclick="toggleChat()">ChatBot</button>
+  </div>
+
+  <div class="profile-wrapper" id="profileWrapper">
+    <button id="profileBtn" class="profile-btn" aria-haspopup="true" aria-expanded="false">☰</button>
+    <ul id="profileMenu" class="profile-menu">
+      <li><a href="profile.html" class="profile-item">👤 My Profile</a></li>
+      <li><a href="login.html" id="logoutBtn" class="profile-item">➜] Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+    <section class="info-card">
+      <h1 class="section-title">Basic Education Admission Info</h1>
+      <p class="section-subtitle">Start your journey with Datamex College of Saint Adeline by preparing the necessary documents.</p>
+  
+      <div class="requirements">
+        <div class="requirement-box">
+          <h2>For Freshmen Students</h2>
+          <ul>
+          <li>✅ Accomplished Application Form</li>
+          <li>📄 High School Report Card (Form 138)</li>
+          <li>📘 High School Transcript (Form 137-A)</li>
+          <li>🏅 Certificate of Good Moral Character</li>
+          <li>🖼️ Two (2) pcs 2x2 picture (for 201 file)</li>
+          <li>🆔 One (1) pc 1x1 picture (for ID)</li>
+        </ul>
+      </div>
+
+      <!-- Transferees Section -->
+      <div class="requirement-box">
+        <h2>For Transferees</h2>
+        <ul>
+          <li>✅ Accomplished Application Form</li>
+          <li>📜 Honorable Dismissal / Transfer Credentials</li>
+          <li>📘 Temporary Transcript / Certificate of Grades for evaluation</li>
+          <li>📨 Official Transcript of Records sent by previous school with notation</li>
+          <li>🗂️ Subject description taken from the previous school</li>
+          <li>🆔 One (1) pc 1x1 picture (for ID)</li>
+        </ul>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  
+
+
+<!-- ===== CHATBOT ===== -->
+<div id="chatbot" style="display: none; flex-direction: column;">
+  <div class="chat-header">🤖 DatamexBot</div>
+
+  <div id="chat-messages" class="chat-messages"></div>
+
+  <div id="suggestions" class="suggestions"></div>
+
+  <div class="chat-input">
+    <input id="chatInput" class="input" placeholder="Ask something...">
+    <button class="btn-main" onclick="sendChat()">Send</button>
+  </div>
+</div>
+
+  
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h2>🏫 Branches</h2>
+      <p>Parañaque, Metro Manila</p>
+      <p>Pasay City, Metro Manila</p>
+      <p>Caloocan City, Metro Manila</p>
+    </div>
+
+    <div class="footer-section">
+      <h2>📞 Contact</h2>
+      <p>+63-929-551-5005</p>
+      <p>+63-926-395-8937</p>
+      <p>Email: <a href="mailto:info@datamex.edu.ph">info@datamex.edu.ph</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Datamex College Of Saint Adeline. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="dcsa.js"></script>
+</body>
+</html>
