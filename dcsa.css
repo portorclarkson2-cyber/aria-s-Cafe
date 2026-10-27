@@ -199,7 +199,7 @@ nav .btn-outline:hover {
    CONTENT & CARDS
 ===================================== */
 .bgimg {
-  background: url("img/gb.jpg") center/cover no-repeat;
+  background: url("gb.jpg") center/cover no-repeat;
   min-height: 100vh;
   position: relative;
   color: #e5dcc159;
