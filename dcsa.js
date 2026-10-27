@@ -184,7 +184,7 @@ function loadMenuFromAdmin() {
         name:"Matcha Milk Tea",
         description:"Rich and creamy matcha combined with smooth milk tea.",
         price:139,
-        img:"images/b.4.jpg",
+        img:"b.4.jpg",
         category:"Milk Tea"
       },
     
@@ -192,7 +192,7 @@ function loadMenuFromAdmin() {
         name:"Strawberry Refresher",
         description:"A fruity and refreshing strawberry drink perfect for a cool afternoon.",
         price:129,
-        img:"img/k1.jpg",
+        img:"k1.jpg",
         category:"Refreshers"
       },
     
