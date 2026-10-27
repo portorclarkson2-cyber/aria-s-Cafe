@@ -160,7 +160,7 @@ function loadMenuFromAdmin() {
         name:"Brown Sugar Milk Tea",
         description:"Creamy milk tea blended with brown sugar and chewy tapioca pearls.",
         price:129,
-        img:"./b.1.jpg",
+        img:"./b1.jpg",
         category:"Milk Tea"
       },
     
@@ -168,7 +168,7 @@ function loadMenuFromAdmin() {
         name:"Classic Pearl Milk Tea",
         description:"Smooth and refreshing milk tea served with chewy tapioca pearls.",
         price:119,
-        img:"./b.2.jpg",
+        img:"./b2.jpg",
         category:"Milk Tea"
       },
     
@@ -176,7 +176,7 @@ function loadMenuFromAdmin() {
         name:"Wintermelon Milk Tea",
         description:"Sweet and creamy wintermelon milk tea with a refreshing flavor.",
         price:125,
-        img:"./b.3.jpg",
+        img:"./b3.jpg",
         category:"Milk Tea"
       },
     
