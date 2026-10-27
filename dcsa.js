@@ -200,7 +200,7 @@ function loadMenuFromAdmin() {
         name:"Mango Refresher",
         description:"Sweet tropical mango flavor mixed into a refreshing chilled drink.",
         price:129,
-        img:"images/i.2.jpg",
+        img:"./k3.jpg",
         category:"Refreshers"
       },
     
@@ -208,7 +208,7 @@ function loadMenuFromAdmin() {
         name:"Blueberry Refresher",
         description:"A cool and fruity blueberry drink with a sweet and refreshing taste.",
         price:129,
-        img:"images/i.5.jpg",
+        img:"k2.jpg",
         category:"Refreshers"
       }
     ];
