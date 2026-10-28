@@ -160,7 +160,7 @@ function loadMenuFromAdmin() {
         name:"OKINAWA",
         description:"gets its unique caramel taste from kokuto, a special roasted brown sugar made on Okinawa island..",
         price:129,
-        img:"./k1.jpg",
+        img:"k1.jpg",
         category:"Milk Tea"
       },
     
