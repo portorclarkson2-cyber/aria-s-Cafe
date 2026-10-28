@@ -173,10 +173,10 @@ function loadMenuFromAdmin() {
       },
     
       {
-        name:"Wintermelon Milk Tea",
-        description:"Sweet and creamy wintermelon milk tea with a refreshing flavor.",
+        name:"STRAWBERRY LATTE",
+        description:"When poured over ice, this drink creates a beautiful, striking red and white layered gradient look .",
         price:125,
-        img:"./b3.jpg",
+        img:"./k2.jpg",
         category:"Milk Tea"
       },
     
