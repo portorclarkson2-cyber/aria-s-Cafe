@@ -157,10 +157,10 @@ function loadMenuFromAdmin() {
 
     menu = [
       {
-        name:"Brown Sugar Milk Tea",
-        description:"Creamy milk tea blended with brown sugar and chewy tapioca pearls.",
+        name:"OKINAWA",
+        description:"gets its unique caramel taste from kokuto, a special roasted brown sugar made on Okinawa island..",
         price:129,
-        img:"./b1.jpg",
+        img:"./k1.jpg",
         category:"Milk Tea"
       },
     
