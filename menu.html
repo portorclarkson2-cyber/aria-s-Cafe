@@ -200,19 +200,100 @@
 <!-- ================= LEFT MENU ================= -->
 <div class="menu-section">
 
- <!-- HOT -->
+ 
 <div id="hot" class="menu" style="display:block">
   <h2>Milk Tea 🥤</h2>
-  <div class="menu-grid" id="hotList"></div>
+
+  <div class="menu-grid" id="hotList">
+
+    <div class="menu-item">
+      <img src="k1.jpg" alt="OKINAWA">
+      <h5>OKINAWA</h5>
+      <p class="menu-description">gets its unique caramel taste from kokuto, a special roasted brown sugar made on Okinawa island.</p>
+      <p class="menu-price">₱99</p>
+      <button class="order-btn"
+        onclick="addToCart('OKINAWA',99,'k1.jpg')">
+        Order
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <img src="b2.jpg" alt="Classic Pearl Milk Tea">
+      <h5>Classic Pearl Milk Tea</h5>
+      <p class="menu-description">Classic milk tea with chewy tapioca pearls.</p>
+      <p class="menu-price">₱119</p>
+      <button class="order-btn"
+        onclick="addToCart('Classic Pearl Milk Tea',119,'b2.jpg')">
+        Order
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <img src="b3.jpg" alt="Wintermelon Milk Tea">
+      <h5>Wintermelon Milk Tea</h5>
+      <p class="menu-description">Refreshing milk tea with wintermelon flavor.</p>
+      <p class="menu-price">₱125</p>
+      <button class="order-btn"
+        onclick="addToCart('Wintermelon Milk Tea',125,'b3.jpg')">
+        Order
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <img src="b4.jpg" alt="Matcha Milk Tea">
+      <h5>Matcha Milk Tea</h5>
+      <p class="menu-description">Creamy milk tea with rich matcha flavor.</p>
+      <p class="menu-price">₱139</p>
+      <button class="order-btn"
+        onclick="addToCart('Matcha Milk Tea',139,'b4.jpg')">
+        Order
+      </button>
+    </div>
+
+  </div>
 </div>
 
-<!-- ICED -->
 <div id="iced" class="menu">
   <h2>Refreshers 🍹</h2>
-  <div class="menu-grid" id="icedList"></div>
+
+  <div class="menu-grid" id="icedList">
+
+    <div class="menu-item">
+      <img src="k1.jpg" alt="Strawberry Refresher">
+      <h5>Strawberry Refresher</h5>
+      <p class="menu-description">A fruity strawberry drink.</p>
+      <p class="menu-price">₱129</p>
+      <button class="order-btn"
+        onclick="addToCart('Strawberry Refresher',129,'k1.jpg')">
+        Order
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <img src="k3.jpg" alt="Mango Refresher">
+      <h5>Mango Refresher</h5>
+      <p class="menu-description">A sweet and refreshing mango drink.</p>
+      <p class="menu-price">₱129</p>
+      <button class="order-btn"
+        onclick="addToCart('Mango Refresher',129,'k3.jpg')">
+        Order
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <img src="k2.jpg" alt="Blueberry Refresher">
+      <h5>Blueberry Refresher</h5>
+      <p class="menu-description">A cool and fruity blueberry drink.</p>
+      <p class="menu-price">₱129</p>
+      <button class="order-btn"
+        onclick="addToCart('Blueberry Refresher',129,'k2.jpg')">
+        Order
+      </button>
+    </div>
+
+  </div>
 </div>
 
-</div>
 
 <!-- ================= CART ================= -->
 <div id="cart" class="cart-container">
