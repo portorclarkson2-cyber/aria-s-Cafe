@@ -155,63 +155,58 @@ function loadMenuFromAdmin() {
 
   if (menu.length === 0) {
 
-    menu = [
-      {
-        name:"OKINAWA",
-        description:"gets its unique caramel taste from kokuto, a special roasted brown sugar made on Okinawa island..",
-        price:129,
-        img:"k1.jpg",
-        category:"Milk Tea"
-      },
     
-      {
-        name:"Classic Pearl Milk Tea",
-        description:"Smooth and refreshing milk tea served with chewy tapioca pearls.",
-        price:119,
-        img:"./b2.jpg",
-        category:"Milk Tea"
-      },
-    
-      {
-        name:"STRAWBERRY LATTE",
-        description:"When poured over ice, this drink creates a beautiful, striking red and white layered gradient look .",
-        price:125,
-        img:"./k2.jpg",
-        category:"Milk Tea"
-      },
-    
-      {
-        name:"Matcha Milk Tea",
-        description:"Rich and creamy matcha combined with smooth milk tea.",
-        price:139,
-        img:"b.4.jpg",
-        category:"Milk Tea"
-      },
-    
-      {
-        name:"Strawberry Refresher",
-        description:"A fruity and refreshing strawberry drink perfect for a cool afternoon.",
-        price:129,
-        img:"k1.jpg",
-        category:"Refreshers"
-      },
-    
-      {
-        name:"Mango Refresher",
-        description:"Sweet tropical mango flavor mixed into a refreshing chilled drink.",
-        price:129,
-        img:"./k3.jpg",
-        category:"Refreshers"
-      },
-    
-      {
-        name:"Blueberry Refresher",
-        description:"A cool and fruity blueberry drink with a sweet and refreshing taste.",
-        price:129,
-        img:"k2.jpg",
-        category:"Refreshers"
-      }
-    ];
+menu = [
+  {
+    name: "Brown Sugar Milk Tea",
+    description: "Rich and creamy milk tea with a sweet brown sugar flavor.",
+    price: 129,
+    img: "images/b.1.jpg",
+    category: "Milk Tea"
+  },
+  {
+    name: "Classic Pearl Milk Tea",
+    description: "Smooth milk tea served with chewy tapioca pearls.",
+    price: 119,
+    img: "images/b.2.jpg",
+    category: "Milk Tea"
+  },
+  {
+    name: "Wintermelon Milk Tea",
+    description: "A refreshing milk tea with a mellow wintermelon flavor.",
+    price: 125,
+    img: "images/b.3.jpg",
+    category: "Milk Tea"
+  },
+  {
+    name: "Matcha Milk Tea",
+    description: "Rich and creamy matcha milk tea.",
+    price: 139,
+    img: "images/b.4.jpg",
+    category: "Milk Tea"
+  },
+  {
+    name: "Strawberry Refresher",
+    description: "A fruity and refreshing strawberry drink.",
+    price: 129,
+    img: "img/k1.jpg",
+    category: "Refreshers"
+  },
+  {
+    name: "Mango Refresher",
+    description: "A sweet tropical mango drink.",
+    price: 129,
+    img: "images/i.2.jpg",
+    category: "Refreshers"
+  },
+  {
+    name: "Blueberry Refresher",
+    description: "A cool and fruity blueberry drink.",
+    price: 129,
+    img: "images/i.5.jpg",
+    category: "Refreshers"
+  }
+];
 
     localStorage.setItem("menu", JSON.stringify(menu));
 
