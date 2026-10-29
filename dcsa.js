@@ -161,49 +161,49 @@ menu = [
     name: "Brown Sugar Milk Tea",
     description: "Rich and creamy milk tea with a sweet brown sugar flavor.",
     price: 129,
-    img: "images/b.1.jpg",
+    img: "./b.1.jpg",
     category: "Milk Tea"
   },
   {
     name: "Classic Pearl Milk Tea",
     description: "Smooth milk tea served with chewy tapioca pearls.",
     price: 119,
-    img: "images/b.2.jpg",
+    img: "./b.2.jpg",
     category: "Milk Tea"
   },
   {
     name: "Wintermelon Milk Tea",
     description: "A refreshing milk tea with a mellow wintermelon flavor.",
     price: 125,
-    img: "images/b.3.jpg",
+    img: "./b.3.jpg",
     category: "Milk Tea"
   },
   {
     name: "Matcha Milk Tea",
     description: "Rich and creamy matcha milk tea.",
     price: 139,
-    img: "images/b.4.jpg",
+    img: "./b.4.jpg",
     category: "Milk Tea"
   },
   {
     name: "Strawberry Refresher",
     description: "A fruity and refreshing strawberry drink.",
     price: 129,
-    img: "img/k1.jpg",
+    img: "./k1.jpg",
     category: "Refreshers"
   },
   {
     name: "Mango Refresher",
     description: "A sweet tropical mango drink.",
     price: 129,
-    img: "images/i.2.jpg",
+    img: "./i.2.jpg",
     category: "Refreshers"
   },
   {
     name: "Blueberry Refresher",
     description: "A cool and fruity blueberry drink.",
     price: 129,
-    img: "images/i.5.jpg",
+    img: "./i.5.jpg",
     category: "Refreshers"
   }
 ];
